@@ -77,7 +77,7 @@ else:
             with st.expander(f"🌿 {name} — ficha pendiente de validar"):
                 st.caption(data["scientific"])
                 st.write(data["notes"])
-       with st.expander("Fuentes y transparencia"):
+        with st.expander("Fuentes y transparencia"):
         st.markdown("""
         - [AGROSAVIA — Sistema Experto MAPA](https://semapa.agrosavia.co/), referente para apoyo a decisiones agrícolas.
         - [Descripción institucional del Sistema Experto MAPA](https://www.agrosavia.co/productos-y-servicios/oferta-tecnol%C3%B3gica/l%C3%ADnea-agr%C3%ADcola/cultivos-transitorios-y-agroindustriales/sistemas-de-informaci%C3%B3n/723-sistema-experto-mapa).
