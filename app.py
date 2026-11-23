@@ -13,7 +13,7 @@ CROPS = {
     "Guama": {"scientific": "Inga edulis"},
     "Carambola": {"scientific": "Averrhoa carambola"},
     "Madroño": {"scientific": "Garcinia madruno"},
-    "Chirimoya": {"scientific": "Annona cherimola"},
+    "Chirimoya": {"scientific": "Annona cherimola"},}
 
 
 st.markdown("""
