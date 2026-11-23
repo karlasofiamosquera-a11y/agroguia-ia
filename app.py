@@ -31,8 +31,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
-st.info("Prototipo demostrativo: aún no consulta clima en tiempo real ni contiene una base agronómica validada. Las salidas son orientativas y no sustituyen asesoría profesional.")
 
 with st.sidebar:
     st.header("Tu espacio de cultivo")
