@@ -69,6 +69,9 @@ with st.sidebar:
     st.header("Tu espacio de cultivo")
     location = st.text_input("Ubicación", "Cali, Valle del Cauca")
     climate = st.selectbox("Clima percibido", ["Cálido", "Templado", "Frío", "No estoy seguro"])
+    temperature = st.number_input("Temperatura promedio (°C), si la conoces", min_value=0.0, max_value=50.0, value=0.0, step=0.5)
+    rainfall = st.number_input("Precipitación anual (mm), si la conoces", min_value=0, max_value=10000, value=0, step=100)
+    soil_ph = st.number_input("pH del suelo (0 si no lo conoces)", min_value=0.0, max_value=14.0, value=0.0, step=0.1)
     altitude = st.number_input("Altitud aproximada (m s. n. m.), si la conoces", min_value=0, max_value=5000, value=0, step=50)
     area = st.number_input("Área disponible (m²)", min_value=0.1, max_value=100000.0, value=10.0, step=1.0)
     space = st.selectbox("Tipo de espacio", ["Balcón o materas", "Patio o jardín", "Huerta", "Parcela o terreno amplio"])
@@ -119,4 +122,3 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
 
 else:
     st.write("Completa los datos del espacio en el panel lateral y selecciona una modalidad. Luego pulsa **Analizar condiciones**.")
-    st.markdown("#### ¿Cómo se decidirá la compatibilidad?")
