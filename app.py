@@ -4,16 +4,16 @@ st.set_page_config(page_title="AgroGuía IA | La Última Cosecha", page_icon="�
 
 
 CROPS = {
-    "Anón": {"scientific": "Annona squamosa", "notes": "Confirmar especie, adaptación a temperatura y requerimientos de suelo con una ficha técnica local.},
-    "Zapote": {"scientific": "Matisia cordata", "notes": "El nombre zapote puede referirse a especies distintas. Confirmar nombre científico antes de evaluar aptitud."},
-    "Arazá": {"scientific": "Eugenia stipitata", "notes": "Verificar adaptación local, requerimientos de humedad, drenaje y condiciones de establecimiento."},
-    "Brevo": {"scientific": "Ficus carica", "notes": "Confirmar qué especie se denomina brevo en el proyecto y revisar sus necesidades de clima y espacio."},
-    "Caimito": {"scientific": "Pouteria caimito", "notes": "Confirmar identidad botánica y tamaño adulto; evaluar espacio, suelo, clima y disponibilidad de agua."},
-    "Pomarrosa": {"scientific": "Syzygium jambos", "notes": "El nombre común puede variar. Revisar identidad, tamaño adulto y posible comportamiento invasor en el contexto local."},
-    "Guama": {"scientific": "Inga edulis", "notes": "Identificar la especie de Inga y considerar tamaño adulto, función del cultivo y espacio disponible."},
-    "Carambola": {"scientific": "Averrhoa carambola", "notes": "Verificar condiciones de temperatura, drenaje, exposición, manejo y tamaño del árbol."},
-    "Madroño": {"scientific": "Garcinia madruno", "notes": "Confirmar identidad. Evaluar el espacio para el árbol adulto, suelo, drenaje, clima y luz."},
-    "Chirimoya": {"scientific": "Annona cherimola", "notes": "La adaptación depende de temperatura, altitud y variedad; no asumir que un clima cálido es apropiado sin datos."},
+    "Anón": {"scientific": "Annona squamosa"},
+    "Zapote": {"scientific": "Matisia cordata"},
+    "Arazá": {"scientific": "Eugenia stipitata"},
+    "Brevo": {"scientific": "Ficus carica"},
+    "Caimito": {"scientific": "Pouteria caimito"},
+    "Pomarrosa": {"scientific": "Syzygium jambos"},
+    "Guama": {"scientific": "Inga edulis"},
+    "Carambola": {"scientific": "Averrhoa carambola"},
+    "Madroño": {"scientific": "Garcinia madruno"},
+    "Chirimoya": {"scientific": "Annona cherimola"},
 
 
 st.markdown("""
