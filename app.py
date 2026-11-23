@@ -66,7 +66,7 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
         if drainage == "No sé": missing.append("drenaje")
         if sunlight == "No sé": missing.append("horas de sol directo")
         if water == "No sé": missing.append("disponibilidad real de agua en épocas secas")
-       missing += ["ficha técnica aplicable a las condiciones de la zona", "espacio requerido por la planta adulta"]
+        missing += ["ficha técnica aplicable a las condiciones de la zona", "espacio requerido por la planta adulta"]
         for item in missing:
             st.write(f"- {item.capitalize()}")
         st.markdown("**Siguiente paso**")
