@@ -2,10 +2,9 @@ import streamlit as st
 
 st.set_page_config(page_title="AgroGuía IA | La Última Cosecha", page_icon="🌱", layout="wide")
 
-# Prototipo académico: las fichas son una estructura inicial y NO deben tratarse como
-# recomendaciones agronómicas validadas hasta completar fuentes técnicas verificadas.
+
 CROPS = {
-    "Anón": {"scientific": "Annona squamosa (por confirmar según nombre local)", "notes": "Confirmar especie, adaptación a temperatura y requerimientos de suelo con una ficha técnica local."},
+    "Anón": {"scientific": "Annona squamosa", "notes": "Confirmar especie, adaptación a temperatura y requerimientos de suelo con una ficha técnica local."},
     "Zapote": {"scientific": "Nombre común ambiguo; identificar especie", "notes": "El nombre zapote puede referirse a especies distintas. Confirmar nombre científico antes de evaluar aptitud."},
     "Arazá": {"scientific": "Eugenia stipitata", "notes": "Verificar adaptación local, requerimientos de humedad, drenaje y condiciones de establecimiento."},
     "Brevo": {"scientific": "Ficus carica (si se refiere a higuera); confirmar nombre local", "notes": "Confirmar qué especie se denomina brevo en el proyecto y revisar sus necesidades de clima y espacio."},
@@ -13,7 +12,7 @@ CROPS = {
     "Pomarrosa": {"scientific": "Syzygium jambos (por confirmar)", "notes": "El nombre común puede variar. Revisar identidad, tamaño adulto y posible comportamiento invasor en el contexto local."},
     "Guama": {"scientific": "Inga spp. (especie por confirmar)", "notes": "Identificar la especie de Inga y considerar tamaño adulto, función del cultivo y espacio disponible."},
     "Carambola": {"scientific": "Averrhoa carambola", "notes": "Verificar condiciones de temperatura, drenaje, exposición, manejo y tamaño del árbol."},
-    "Madroño": {"scientific": "Garcinia madruno (si es la especie deseada)", "notes": "Confirmar identidad. Evaluar el espacio para el árbol adulto, suelo, drenaje, clima y luz."},
+    "Madroño": {"scientific": "Garcinia madruno", "notes": "Confirmar identidad. Evaluar el espacio para el árbol adulto, suelo, drenaje, clima y luz."},
     "Chirimoya": {"scientific": "Annona cherimola", "notes": "La adaptación depende de temperatura, altitud y variedad; no asumir que un clima cálido es apropiado sin datos."},
 }
 
