@@ -71,22 +71,21 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
             st.write(f"- {item.capitalize()}")
         st.markdown("**Siguiente paso**")
         st.write("Contrastar los datos del sitio con una ficha técnica confiable y documentar la fuente antes de recomendar la siembra.")
-else:
+    else:
         st.write("AgroGuía IA presenta los cultivos incluidos en su base documental. La comparación de compatibilidad se realizará a partir de los requerimientos agronómicos registrados y las condiciones del terreno del usuario.")
+
         for name, data in CROPS.items():
             with st.expander(f"🌿 {name} — ficha pendiente de validar"):
                 st.caption(data["scientific"])
                 st.write(data["notes"])
-        with st.expander("Fuentes y transparencia"):
+
+    with st.expander("Fuentes y transparencia"):
         st.markdown("""
         - [AGROSAVIA — Sistema Experto MAPA](https://semapa.agrosavia.co/), referente para apoyo a decisiones agrícolas.
         - [Descripción institucional del Sistema Experto MAPA](https://www.agrosavia.co/productos-y-servicios/oferta-tecnol%C3%B3gica/l%C3%ADnea-agr%C3%ADcola/cultivos-transitorios-y-agroindustriales/sistemas-de-informaci%C3%B3n/723-sistema-experto-mapa).
         - Las identidades botánicas señaladas como “por confirmar” deben verificarse con el equipo del proyecto y fuentes botánicas/agronómicas. No se generan diagnósticos ni predicciones de rendimiento.
         """)
+
 else:
     st.write("Completa los datos del espacio en el panel lateral y selecciona una modalidad. Luego pulsa **Analizar condiciones**.")
     st.markdown("#### ¿Cómo se decidirá la compatibilidad?")
-  st.write("La herramienta utiliza información agronómica documentada para contrastar las condiciones del terreno con los requerimientos de cada cultivo. Cuando no dispone de datos suficientes, señala las limitaciones de la evaluación y evita emitir conclusiones sin respaldo.")
-
-st.divider()
-st.caption("AgroGuía IA · La Última Cosecha · prototipo académico no validado para decisiones reales.")
