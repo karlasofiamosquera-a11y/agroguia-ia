@@ -71,13 +71,13 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
             st.write(f"- {item.capitalize()}")
         st.markdown("**Siguiente paso**")
         st.write("Contrastar los datos del sitio con una ficha técnica confiable y documentar la fuente antes de recomendar la siembra.")
-    else:
-      st.write("AgroGuía IA presenta los cultivos incluidos en su base documental. La comparación de compatibilidad se realizará a partir de los requerimientos agronómicos registrados y las condiciones del terreno del usuario.")
+else:
+        st.write("AgroGuía IA presenta los cultivos incluidos en su base documental. La comparación de compatibilidad se realizará a partir de los requerimientos agronómicos registrados y las condiciones del terreno del usuario.")
         for name, data in CROPS.items():
             with st.expander(f"🌿 {name} — ficha pendiente de validar"):
                 st.caption(data["scientific"])
                 st.write(data["notes"])
-    with st.expander("Fuentes y transparencia"):
+       with st.expander("Fuentes y transparencia"):
         st.markdown("""
         - [AGROSAVIA — Sistema Experto MAPA](https://semapa.agrosavia.co/), referente para apoyo a decisiones agrícolas.
         - [Descripción institucional del Sistema Experto MAPA](https://www.agrosavia.co/productos-y-servicios/oferta-tecnol%C3%B3gica/l%C3%ADnea-agr%C3%ADcola/cultivos-transitorios-y-agroindustriales/sistemas-de-informaci%C3%B3n/723-sistema-experto-mapa).
