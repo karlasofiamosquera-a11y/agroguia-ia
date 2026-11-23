@@ -3,17 +3,50 @@ import streamlit as st
 st.set_page_config(page_title="AgroGuía IA | La Última Cosecha", page_icon="🌱", layout="wide")
 
 
+
 CROPS = {
-    "Anón": {"scientific": "Annona squamosa"},
-    "Zapote": {"scientific": "Matisia cordata"},
-    "Arazá": {"scientific": "Eugenia stipitata"},
-    "Brevo": {"scientific": "Ficus carica"},
-    "Caimito": {"scientific": "Pouteria caimito"},
-    "Pomarrosa": {"scientific": "Syzygium jambos"},
-    "Guama": {"scientific": "Inga edulis"},
-    "Carambola": {"scientific": "Averrhoa carambola"},
-    "Madroño": {"scientific": "Garcinia madruno"},
-    "Chirimoya": {"scientific": "Annona cherimola"},}
+    "Anón": {
+        "scientific": "Annona squamosa L.",
+        "notes": "Familia: Annonaceae. Árbol pequeño de clima tropical. Prefiere suelos bien drenados. Tolera periodos secos, pero no el encharcamiento. Pendiente: validar condiciones específicas para el Valle del Cauca."
+    },
+    "Zapote": {
+        "scientific": "Matisia cordata Humb. & Bonpl.",
+        "notes": "Árbol frutal de la familia Bombacaceae según la fuente consultada. Prefiere exposición soleada y suelos ricos en materia orgánica. Hay diferencias entre las fuentes sobre el crecimiento y la profundidad de sus raíces. Pendiente: validar condiciones locales."
+    },
+    "Arazá": {
+        "scientific": "Eugenia stipitata",
+        "notes": "Familia: Myrtaceae. Especie amazónica de clima tropical y subtropical, sensible a las heladas. Se propaga por semillas. Su fruto es muy perecedero. Pendiente: completar requerimientos climáticos y de suelo para el Valle del Cauca."
+    },
+    "Brevo": {
+        "scientific": "Ficus carica L.",
+        "notes": "Familia: Moraceae. Especie de origen mediterráneo. Requiere buena exposición solar y suelos bien drenados. La disponibilidad de agua influye en su producción. Pendiente: evaluar su adaptación a las condiciones tropicales de Cali."
+    },
+    "Caimito": {
+        "scientific": "Pouteria caimito",
+        "notes": "Familia: Sapotaceae. Árbol frutal originario de la cuenca amazónica. Presenta raíces profundas y propagación por semillas. Pendiente: completar requerimientos de clima, suelo, agua y luz."
+    },
+    "Pomarrosa": {
+        "scientific": "Syzygium jambos (L.) Alston",
+        "notes": "Familia: Myrtaceae. Árbol tropical que tolera diferentes tipos de suelo y condiciones de luz. Puede soportar periodos secos cortos. Presenta potencial invasor en algunas regiones. Pendiente: evaluar su comportamiento ecológico local."
+    },
+    "Guama": {
+        "scientific": "Inga edulis",
+        "notes": "Familia: Leguminosae, según la clasificación de la fuente consultada. Árbol tropical americano de crecimiento rápido, raíces profundas y copa amplia. Pendiente: completar requerimientos climáticos, hídricos y de suelo."
+    },
+    "Carambola": {
+        "scientific": "Averrhoa carambola L.",
+        "notes": "Familia: Oxalidaceae. Árbol o arbusto frutal de origen asiático, cultivado en regiones tropicales. Se propaga por semillas. Pendiente: completar información de clima, suelo, agua, luz y producción."
+    },
+    "Madroño": {
+        "scientific": "Garcinia madruno",
+        "notes": "Árbol frutal nativo de Colombia y otras regiones tropicales de América. Se desarrolla en temperaturas medias de 22 a 28 °C y precipitaciones reportadas de 1.200 a 1.500 mm anuales. Pendiente: completar datos de suelo, luz, agua y espacio."
+    },
+    "Chirimoya": {
+        "scientific": "Annona cherimola Mill.",
+        "notes": "Familia: Annonaceae. Árbol frutal subtropical que requiere suelos bien drenados y humedad relativamente constante. La polinización manual puede ser necesaria para mejorar la fructificación. Pendiente: evaluar su adaptación al clima cálido de Cali."
+    }
+}
+
 
 
 st.markdown("""
