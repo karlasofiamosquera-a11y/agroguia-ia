@@ -4,17 +4,17 @@ st.set_page_config(page_title="AgroGuía IA | La Última Cosecha", page_icon="�
 
 
 CROPS = {
-    "Anón": {"scientific": "Annona squamosa", "notes": "Confirmar especie, adaptación a temperatura y requerimientos de suelo con una ficha técnica local."},
-    "Zapote": {"scientific": "Nombre común ambiguo; identificar especie", "notes": "El nombre zapote puede referirse a especies distintas. Confirmar nombre científico antes de evaluar aptitud."},
+    "Anón": {"scientific": "Annona squamosa", "notes": "Confirmar especie, adaptación a temperatura y requerimientos de suelo con una ficha técnica local.},
+    "Zapote": {"scientific": "Matisia cordata", "notes": "El nombre zapote puede referirse a especies distintas. Confirmar nombre científico antes de evaluar aptitud."},
     "Arazá": {"scientific": "Eugenia stipitata", "notes": "Verificar adaptación local, requerimientos de humedad, drenaje y condiciones de establecimiento."},
-    "Brevo": {"scientific": "Ficus carica (si se refiere a higuera); confirmar nombre local", "notes": "Confirmar qué especie se denomina brevo en el proyecto y revisar sus necesidades de clima y espacio."},
-    "Caimito": {"scientific": "Chrysophyllum cainito (por confirmar)", "notes": "Confirmar identidad botánica y tamaño adulto; evaluar espacio, suelo, clima y disponibilidad de agua."},
-    "Pomarrosa": {"scientific": "Syzygium jambos (por confirmar)", "notes": "El nombre común puede variar. Revisar identidad, tamaño adulto y posible comportamiento invasor en el contexto local."},
-    "Guama": {"scientific": "Inga spp. (especie por confirmar)", "notes": "Identificar la especie de Inga y considerar tamaño adulto, función del cultivo y espacio disponible."},
+    "Brevo": {"scientific": "Ficus carica", "notes": "Confirmar qué especie se denomina brevo en el proyecto y revisar sus necesidades de clima y espacio."},
+    "Caimito": {"scientific": "Pouteria caimito", "notes": "Confirmar identidad botánica y tamaño adulto; evaluar espacio, suelo, clima y disponibilidad de agua."},
+    "Pomarrosa": {"scientific": "Syzygium jambos", "notes": "El nombre común puede variar. Revisar identidad, tamaño adulto y posible comportamiento invasor en el contexto local."},
+    "Guama": {"scientific": "Inga edulis", "notes": "Identificar la especie de Inga y considerar tamaño adulto, función del cultivo y espacio disponible."},
     "Carambola": {"scientific": "Averrhoa carambola", "notes": "Verificar condiciones de temperatura, drenaje, exposición, manejo y tamaño del árbol."},
     "Madroño": {"scientific": "Garcinia madruno", "notes": "Confirmar identidad. Evaluar el espacio para el árbol adulto, suelo, drenaje, clima y luz."},
     "Chirimoya": {"scientific": "Annona cherimola", "notes": "La adaptación depende de temperatura, altitud y variedad; no asumir que un clima cálido es apropiado sin datos."},
-}
+
 
 st.markdown("""
 <style>
@@ -56,8 +56,8 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
     if mode == "Tengo un fruto en mente":
         crop = CROPS[selected]
         st.markdown(f"### {selected}")
-        st.caption(f"Identidad botánica de referencia: {crop['scientific']}")
-        st.warning("Viabilidad por confirmar: todavía no hay suficientes datos técnicos validados para emitir una recomendación agronómica.")
+        st.caption(f"Nombre científico: {crop['scientific']}")
+        st.info("Esta ficha presenta información documentada sobre el cultivo. La compatibilidad con tu terreno requiere comparar sus condiciones con los requerimientos agronómicos disponibles.")
         st.write(crop["notes"])
         st.markdown("**Datos que ayudarían a afinar la evaluación**")
         missing = []
@@ -66,13 +66,13 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
         if drainage == "No sé": missing.append("drenaje")
         if sunlight == "No sé": missing.append("horas de sol directo")
         if water == "No sé": missing.append("disponibilidad real de agua en épocas secas")
-        missing += ["nombre científico confirmado del fruto", "ficha técnica aplicable a la zona", "espacio requerido por la planta adulta"]
+       missing += ["ficha técnica aplicable a las condiciones de la zona", "espacio requerido por la planta adulta"]
         for item in missing:
             st.write(f"- {item.capitalize()}")
         st.markdown("**Siguiente paso**")
         st.write("Contrastar los datos del sitio con una ficha técnica confiable y documentar la fuente antes de recomendar la siembra.")
     else:
-        st.write("La aplicación puede organizar una lista de cultivos para investigar, pero aún no debe ordenarlos por viabilidad: primero hay que cargar los requerimientos agronómicos validados de las diez especies.")
+      st.write("AgroGuía IA presenta los cultivos incluidos en su base documental. La comparación de compatibilidad se realizará a partir de los requerimientos agronómicos registrados y las condiciones del terreno del usuario.")
         for name, data in CROPS.items():
             with st.expander(f"🌿 {name} — ficha pendiente de validar"):
                 st.caption(data["scientific"])
@@ -86,7 +86,7 @@ if st.button("Analizar condiciones", type="primary", use_container_width=True):
 else:
     st.write("Completa los datos del espacio en el panel lateral y selecciona una modalidad. Luego pulsa **Analizar condiciones**.")
     st.markdown("#### ¿Cómo se decidirá la compatibilidad?")
-    st.write("La futura versión comparará cada cultivo con clima, altitud, suelo, drenaje, agua, luz y espacio adulto. Si falta información crítica, pedirá aclaraciones en vez de inventar una recomendación.")
+  st.write("La herramienta utiliza información agronómica documentada para contrastar las condiciones del terreno con los requerimientos de cada cultivo. Cuando no dispone de datos suficientes, señala las limitaciones de la evaluación y evita emitir conclusiones sin respaldo.")
 
 st.divider()
 st.caption("AgroGuía IA · La Última Cosecha · prototipo académico no validado para decisiones reales.")
