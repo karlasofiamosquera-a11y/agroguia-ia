@@ -48,6 +48,105 @@ CROPS = {
 }
 
 
+# Requerimientos documentados disponibles.
+# Los valores ausentes se dejan como None: no se inventan.
+
+REQUIREMENTS = {
+    "Madroño": {
+        "temperature": (22, 28),
+        "rainfall": (1200, 1500),
+        "altitude": (0, 1800),
+        "drainage": "Drena bien"
+    },
+    "Anón": {
+        "ph": (5.5, 7.5),
+        "drainage": "Drena bien"
+    },
+    "Carambola": {
+        "ph": (5.0, 6.8),
+        "rainfall": (1800, 1800),
+        "drainage": "Drena bien",
+        "sunlight": ["Sol directo varias horas"]
+    },
+    "Arazá": {
+        "ph": (4.0, 5.5),
+        "rainfall": (2000, 3500),
+        "drainage": "Drena bien"
+    },
+    "Pomarrosa": {
+        "temperature": (20, 30),
+        "rainfall": (1200, 1700),
+        "altitude": (0, 2000),
+        "ph": (5.5, 7.0)
+    },
+    "Brevo": {
+        "ph": (5.5, 8.0),
+        "sunlight": ["Sol directo varias horas"]
+    },
+    "Chirimoya": {
+        "ph": (6.5, 7.6),
+        "drainage": "Drena bien"
+    },
+    "Guama": {},
+    "Zapote": {},
+    "Caimito": {}
+}
+
+
+def evaluate_crop(name):
+    requirements = REQUIREMENTS[name]
+    alerts = []
+    missing = []
+
+    checks = {
+        "temperature": (temperature, "temperatura"),
+        "rainfall": (rainfall, "precipitación anual"),
+        "ph": (soil_ph, "pH del suelo"),
+        "altitude": (altitude, "altitud")
+    }
+
+    for key, (value, label) in checks.items():
+        if key in requirements:
+            if value == 0:
+                missing.append(label)
+            else:
+                minimum, maximum = requirements[key]
+                if not minimum <= value <= maximum:
+                    alerts.append(
+                        f"La {label} registrada ({value}) está fuera "
+                        f"del rango documentado ({minimum}–{maximum})."
+                    )
+
+    if "drainage" in requirements:
+        if drainage == "No sé":
+            missing.append("drenaje")
+        elif drainage != requirements["drainage"]:
+            alerts.append(
+                "El terreno presenta una condición de drenaje "
+                "que requiere revisión frente a los requerimientos del cultivo."
+            )
+
+    if "sunlight" in requirements:
+        if sunlight == "No sé":
+            missing.append("exposición solar")
+        elif sunlight not in requirements["sunlight"]:
+            alerts.append(
+                "La exposición solar registrada no coincide con "
+                "la condición de luz documentada."
+            )
+
+    if not requirements:
+        missing.append("requerimientos agronómicos documentados")
+
+    if alerts:
+        status = "Requiere atención"
+    elif missing:
+        status = "Información insuficiente"
+    else:
+        status = "Sin alertas en los criterios evaluados"
+
+    return status, alerts, missing
+
 
 st.markdown("""
 <style>
@@ -84,41 +183,71 @@ with st.sidebar:
 mode = st.radio("¿Cómo quieres empezar?", ["Tengo un fruto en mente", "Recomiéndame cuáles investigar"], horizontal=True)
 selected = st.selectbox("Fruto de interés", list(CROPS.keys())) if mode == "Tengo un fruto en mente" else None
 
-st.subheader("Tu orientación preliminar")
-if st.button("Analizar condiciones", type="primary", use_container_width=True):
-    st.write(f"**Ubicación registrada:** {location or 'No indicada'}  ·  **Área:** {area:g} m²")
-    if mode == "Tengo un fruto en mente":
-        crop = CROPS[selected]
-        st.markdown(f"### {selected}")
-        st.caption(f"Nombre científico: {crop['scientific']}")
-        st.info("Esta ficha presenta información documentada sobre el cultivo. La compatibilidad con tu terreno requiere comparar sus condiciones con los requerimientos agronómicos disponibles.")
-        st.write(crop["notes"])
-        st.markdown("**Datos que ayudarían a afinar la evaluación**")
-        missing = []
-        if altitude == 0: missing.append("altitud aproximada")
-        if soil == "No sé": missing.append("tipo de suelo o sustrato")
-        if drainage == "No sé": missing.append("drenaje")
-        if sunlight == "No sé": missing.append("horas de sol directo")
-        if water == "No sé": missing.append("disponibilidad real de agua en épocas secas")
-        missing += ["ficha técnica aplicable a las condiciones de la zona", "espacio requerido por la planta adulta"]
-        for item in missing:
-            st.write(f"- {item.capitalize()}")
-        st.markdown("**Siguiente paso**")
-        st.write("Contrastar los datos del sitio con una ficha técnica confiable y documentar la fuente antes de recomendar la siembra.")
-    else:
-        st.write("AgroGuía IA presenta los cultivos incluidos en su base documental. La comparación de compatibilidad se realizará a partir de los requerimientos agronómicos registrados y las condiciones del terreno del usuario.")
 
-        for name, data in CROPS.items():
-            with st.expander(f"🌿 {name} — ficha pendiente de validar"):
-                st.caption(data["scientific"])
-                st.write(data["notes"])
+st.subheader("Tu orientación preliminar")
+
+if st.button("Analizar condiciones", type="primary", use_container_width=True):
+
+    st.write(
+        f"**Ubicación registrada:** {location or 'No indicada'}"
+        f" · **Área:** {area:g} m²"
+    )
+
+    st.info(
+        "Esta es una evaluación preliminar basada en los criterios "
+        "documentados. No reemplaza una valoración agronómica."
+    )
+
+    if mode == "Tengo un fruto en mente":
+        crops_to_evaluate = [selected]
+    else:
+        crops_to_evaluate = list(CROPS.keys())
+
+    for name in crops_to_evaluate:
+        status, alerts, missing = evaluate_crop(name)
+        crop = CROPS[name]
+
+        with st.container():
+            st.markdown(f"### 🌿 {name}")
+            st.caption(f"Nombre científico: {crop['scientific']}")
+
+            if status == "Requiere atención":
+                st.warning(status)
+            elif status == "Información insuficiente":
+                st.info(status)
+            else:
+                st.success(status)
+
+            if alerts:
+                st.markdown("**Condiciones que requieren atención:**")
+                for alert in alerts:
+                    st.write(f"- {alert}")
+
+            if missing:
+                st.markdown("**Datos o requisitos pendientes:**")
+                for item in missing:
+                    st.write(f"- {item.capitalize()}")
+
+            if not alerts and not missing:
+                st.write(
+                    "No se encontraron alertas en los criterios "
+                    "que esta versión puede evaluar."
+                )
+
+            st.caption(crop["notes"])
+            st.divider()
 
     with st.expander("Fuentes y transparencia"):
         st.markdown("""
-        - [AGROSAVIA — Sistema Experto MAPA](https://semapa.agrosavia.co/), referente para apoyo a decisiones agrícolas.
+        - [AGROSAVIA — Sistema Experto MAPA](https://semapa.agrosavia.co/).
         - [Descripción institucional del Sistema Experto MAPA](https://www.agrosavia.co/productos-y-servicios/oferta-tecnol%C3%B3gica/l%C3%ADnea-agr%C3%ADcola/cultivos-transitorios-y-agroindustriales/sistemas-de-informaci%C3%B3n/723-sistema-experto-mapa).
-        - Las identidades botánicas señaladas como “por confirmar” deben verificarse con el equipo del proyecto y fuentes botánicas/agronómicas. No se generan diagnósticos ni predicciones de rendimiento.
+        - Los rangos utilizados son referencias tomadas de las fuentes documentales del proyecto.
+        - La ausencia de alertas no garantiza que el cultivo sea viable.
+        - Los resultados no constituyen diagnósticos ni predicciones de rendimiento.
         """)
 
 else:
-    st.write("Completa los datos del espacio en el panel lateral y selecciona una modalidad. Luego pulsa **Analizar condiciones**.")
+    st.write(
+        "Completa los datos del espacio en el panel lateral y "
+        "selecciona una modalidad. Luego pulsa **Analizar condiciones**."
+    )
